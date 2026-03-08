@@ -26,6 +26,7 @@ Load supporting references as needed:
 - `examples/read-market/read-market.ts`
 - `examples/wallet-order/place-order.ts`
 - `examples/global-liquidity/global-order.ts`
+- `examples/reverse-liquidity/amm-style-batch.ts`
 - `templates/manifest-setup.ts`
 
 ## Instructions
@@ -89,6 +90,7 @@ Copy-paste oriented examples in this skill:
 - `examples/read-market/read-market.ts`
 - `examples/wallet-order/place-order.ts`
 - `examples/global-liquidity/global-order.ts`
+- `examples/reverse-liquidity/amm-style-batch.ts`
 
 ## Guidelines
 

@@ -28,6 +28,7 @@ Use `ManifestClient` when building instructions for deposits, orders, cancels, a
 - Batch operations: `client.batchUpdateIx(...)`
 - Place with required funding: `client.placeOrderWithRequiredDepositIxs(...)`
 - Fill stream: `FillFeed` for processing fills/events
+- AMM-style reverse-liquidity ladder: use `batchUpdateIx(...)` with multiple `Reverse` / `ReverseTight` orders around a reference price
 
 ## Order Types
 
