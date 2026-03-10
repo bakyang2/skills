@@ -130,6 +130,18 @@
       "category": "DeFi"
     },
     {
+      "name": "phantom-connect",
+      "source": "./skills/phantom-connect",
+      "description": "Build wallet-connected Solana apps with Phantom Connect SDK — social login (Google/Apple), transaction signing, token gating, and NFT minting across React, React Native, and Browser SDK",
+      "category": "Frontend"
+    },
+    {
+      "name": "phantom-wallet-mcp",
+      "source": "./skills/phantom-wallet-mcp",
+      "description": "Execute wallet operations via the Phantom MCP server — get addresses, sign transactions, transfer tokens, buy/swap tokens, and sign messages across Solana, Ethereum, Bitcoin, and Sui",
+      "category": "AI Agents"
+    },
+    {
       "name": "pinocchio-development",
       "source": "./skills/pinocchio-development",
       "description": "Pinocchio zero-dependency, zero-copy framework for high-performance Solana programs (88-95% CU reduction)",
