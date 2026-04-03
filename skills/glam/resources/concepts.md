@@ -71,7 +71,7 @@ notifyAndSettle: {
 ## NAV & Pricing
 
 ### AUM Calculation
-AUM = Sum of all token values + sum of all protocol positions (Drift, Kamino, staking, etc.)
+AUM = Sum of all token values + sum of all protocol positions (Kamino, staking, etc.)
 
 ### NAV (Net Asset Value)
 NAV = AUM / Total Share Supply
@@ -106,7 +106,6 @@ Benefits: depeg protection, accurate valuation, reduced manipulation risk.
 | Program | Mainnet | Staging |
 |---------|---------|---------|
 | CCTP Integration | `G1NTcMDYgNLpDwgnrpSZvoSKQuR9NXG7S3DmtNQCDmrK` | — |
-| Drift Integration | `G1NTdrBmBpW43msRQmsf7qXSw3MFBNaqJcAkGiRmRq2F` | `gstgdpMFXKobURsFtStdaMLRSuwdmDUsrndov7kyu9h` |
 | Kamino Integration | `G1NTkDEUR3pkEqGCKZtmtmVzCUEdYa86pezHkwYbLyde` | `gstgKa2Gq9wf5hM3DFWx1TvUrGYzDYszyFGq3XBY9Uq` |
 | SPL Integration | `G1NTsQ36mjPe89HtPYqxKsjY5HmYsDR6CbD2gd2U2pta` | `gstgs9nJgX8PmRHWAAEP9H7xT3ZkaPWSGPYbj3mXdTa` |
 | Marinade Integration | — | `G1NTMNMgmgJAWAD9G3toFVMtNcc21dEyHf3fTXc3t74t` |
@@ -160,19 +159,6 @@ Protocol names must match exactly when used with `glam-cli integration enable` o
 | **KaminoFarms** | Stake | 0 |
 | **KaminoFarms** | Unstake | 1 |
 | **KaminoFarms** | HarvestReward | 2 |
-| **DriftProtocol** | InitUser | 0 |
-| **DriftProtocol** | UpdateUser | 1 |
-| **DriftProtocol** | DeleteUser | 2 |
-| **DriftProtocol** | Deposit | 3 |
-| **DriftProtocol** | Withdraw | 4 |
-| **DriftProtocol** | Borrow | 5 |
-| **DriftProtocol** | Repay | 6 |
-| **DriftProtocol** | CreateModifyOrders | 7 |
-| **DriftProtocol** | CancelOrders | 8 |
-| **DriftProtocol** | PerpMarkets | 9 |
-| **DriftProtocol** | SpotMarkets | 10 |
-| **DriftVaults** | Deposit | 0 |
-| **DriftVaults** | Withdraw | 1 |
 | **SplToken** | Transfer | 0 |
 | **CCTP** | Transfer | 0 |
 | **Marinade** (staging) | Stake | 0 |

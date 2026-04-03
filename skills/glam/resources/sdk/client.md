@@ -97,8 +97,6 @@ client.vault; // Vault operations
 client.state; // Vault state account management
 client.access; // Delegate/permission management
 client.jupiterSwap; // Jupiter swap operations
-client.drift; // Drift protocol operations
-client.driftVaults; // Drift managed vault operations
 client.kaminoLending; // Kamino lending operations
 client.kaminoVaults; // Kamino automated vault operations
 client.kaminoFarm; // Kamino farm/staking operations

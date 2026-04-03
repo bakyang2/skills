@@ -291,8 +291,6 @@ glam-cli integration list
 
 - `SystemProgram` - SOL wrapping and transfers
 - `JupiterSwap` - Token swaps via Jupiter aggregator
-- `DriftProtocol` - Perpetuals and spot trading
-- `DriftVaults` - Drift managed vaults
 - `KaminoLend` - Lending and borrowing
 - `KaminoVaults` - Kamino vaults
 - `KaminoFarms` - Kamino farming
@@ -322,7 +320,7 @@ Integration names support fuzzy matching (case-insensitive, typo suggestions).
 glam-cli integration enable JupiterSwap
 
 # Enable multiple integrations
-glam-cli integration enable JupiterSwap DriftProtocol KaminoLend
+glam-cli integration enable JupiterSwap KaminoLend
 
 # Case-insensitive matching works
 glam-cli integration enable jupiterswap

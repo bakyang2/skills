@@ -57,13 +57,6 @@ Config file: `~/.config/glam/config.json`
 | `No route found for swap`     | Try smaller amount; check `glam-cli jupiter view-policy` for allowlisted tokens |
 | `Slippage tolerance exceeded` | Increase: `--slippage-bps 100` (1%), or reduce trade size                       |
 
-### Drift
-
-| Error                                  | Solution                                                                         |
-| -------------------------------------- | -------------------------------------------------------------------------------- |
-| `Drift user account not found`         | `glam-cli drift-protocol init-user --yes` (required once)                        |
-| `Insufficient collateral for position` | `glam-cli drift-protocol deposit <market_id> <amount> --yes`, or reduce position |
-
 ### Kamino
 
 | Error                          | Solution                                                                          |

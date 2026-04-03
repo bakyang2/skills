@@ -37,12 +37,10 @@
     {
       "name": "delegate-setup",
       "description": "Set up delegate permissions for trading",
-      "prompt": "Configure my vault to allow wallet TRADER456 to perform swaps and Drift trading operations.",
+      "prompt": "Configure my vault to allow wallet TRADER456 to perform swaps.",
       "expectedBehaviors": [
         "Uses glam-cli delegate grant with protocol-scoped permissions",
-        "Grants SwapAny permission with --protocol JupiterSwap",
-        "Grants Drift permissions (Deposit, Withdraw, CreateModifyOrders, CancelOrders) with --protocol DriftProtocol",
-        "Uses separate grant commands per protocol"
+        "Grants SwapAny permission with --protocol JupiterSwap"
       ],
       "tags": [
         "intermediate",
@@ -102,23 +100,6 @@
         "basic",
         "sdk",
         "typescript"
-      ]
-    },
-    {
-      "name": "drift-perp-trading",
-      "description": "Open perpetual position on Drift",
-      "prompt": "Initialize Drift for my vault, deposit 2000 USDC as collateral, and open a 5 SOL long perpetual position.",
-      "expectedBehaviors": [
-        "Enables DriftProtocol integration with glam-cli integration enable DriftProtocol",
-        "Uses glam-cli drift-protocol init-user",
-        "Uses glam-cli drift-protocol deposit 0 2000 (market_index 0, amount 2000)",
-        "Uses glam-cli drift-protocol perp long 0 5 0 (direction, market_index, amount, price_limit)"
-      ],
-      "tags": [
-        "advanced",
-        "drift",
-        "perpetuals",
-        "cli"
       ]
     },
     {
@@ -226,23 +207,6 @@
         "mint",
         "compliance",
         "sdk"
-      ]
-    },
-    {
-      "name": "policy-management",
-      "description": "Set up Drift market allowlist and delegate with protocol-scoped permissions",
-      "prompt": "Configure my vault to only allow trading on SOL-PERP (market index 0) on Drift, and grant my trader TRADER456 permissions to place and cancel orders.",
-      "expectedBehaviors": [
-        "Uses glam-cli drift-protocol allowlist-market perp 0 to add SOL-PERP",
-        "Uses glam-cli delegate grant TRADER456 CreateModifyOrders CancelOrders --protocol DriftProtocol",
-        "Mentions that market allowlist restricts which markets can be traded",
-        "Notes the perp type prefix for allowlist-market command"
-      ],
-      "tags": [
-        "intermediate",
-        "policy",
-        "drift",
-        "cli"
       ]
     },
     {

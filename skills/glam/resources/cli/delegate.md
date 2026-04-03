@@ -15,7 +15,7 @@ glam-cli delegate grant <pubkey> <permissions...> --protocol <name> [--yes]
 **Options:**
 | Flag | Description |
 |------|-------------|
-| `--protocol <NAME>` | Protocol to scope permissions to (e.g., `DriftProtocol`, `KaminoLend`, `JupiterSwap`, `SplToken`) |
+| `--protocol <NAME>` | Protocol to scope permissions to (e.g., `KaminoLend`, `JupiterSwap`, `SplToken`) |
 | `-y, --yes` | Skip confirmation prompt |
 
 **Available permissions by protocol:**
@@ -27,8 +27,6 @@ glam-cli delegate grant <pubkey> <permissions...> --protocol <name> [--yes]
 | **SplToken** | `Transfer` |
 | **CCTP** | `Transfer` |
 | **GlamMint** | `MintTokens`, `BurnTokens`, `ForceTransfer`, `SetTokenAccountState`, `ClaimFees`, `Fulfill`, `EmergencyUpdate`, `CancelRequest`, `ClaimRequest` |
-| **DriftProtocol** | `InitUser`, `UpdateUser`, `DeleteUser`, `Deposit`, `Withdraw`, `Borrow`, `Repay`, `CreateModifyOrders`, `CancelOrders`, `PerpMarkets`, `SpotMarkets` |
-| **DriftVaults** | `Deposit`, `Withdraw` |
 | **KaminoLend** | `Init`, `Deposit`, `Withdraw`, `Borrow`, `Repay` |
 | **KaminoVaults** | `Deposit`, `Withdraw` |
 | **KaminoFarms** | `Stake`, `Unstake`, `HarvestReward` |
@@ -43,9 +41,6 @@ glam-cli delegate grant <pubkey> <permissions...> --protocol <name> [--yes]
 ```bash
 # Grant Kamino lending permissions (protocol-scoped)
 glam-cli delegate grant <DELEGATE> Deposit Withdraw --protocol KaminoLend
-
-# Grant Drift trading permissions
-glam-cli delegate grant <DELEGATE> Deposit Withdraw CreateModifyOrders CancelOrders PerpMarkets --protocol DriftProtocol
 
 # Grant Jupiter swap permissions
 glam-cli delegate grant <DELEGATE> SwapAny --protocol JupiterSwap
@@ -79,9 +74,7 @@ glam-cli delegate revoke <pubkey> <permissions...> --protocol <name> [--yes]
 **Examples:**
 
 ```bash
-# Revoke specific Drift permissions
-glam-cli delegate revoke <DELEGATE> PerpMarkets SpotMarkets --protocol DriftProtocol
-
+# Revoke specific permissions
 # Revoke transfer permission
 glam-cli delegate revoke <DELEGATE> Transfer --protocol SplToken
 ```
@@ -113,10 +106,7 @@ This applies to `--protocol` values and permission names in `grant` and `revoke`
 ### Trading Delegate Setup
 
 ```bash
-# Drift trading permissions
-glam-cli delegate grant <TRADER> Deposit Withdraw CreateModifyOrders CancelOrders PerpMarkets SpotMarkets --protocol DriftProtocol
-
-# Also grant swap access
+# Grant swap access
 glam-cli delegate grant <TRADER> SwapAny --protocol JupiterSwap
 ```
 

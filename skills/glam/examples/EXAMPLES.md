@@ -122,9 +122,6 @@ glam-cli delegate grant <DELEGATE_PUBKEY> SwapAny --protocol JupiterSwap --yes
 # Verify delegate was added
 glam-cli delegate list
 
-# Grant Drift trading permissions to same or another delegate
-glam-cli delegate grant <DELEGATE_PUBKEY> Deposit Withdraw CreateModifyOrders CancelOrders --protocol DriftProtocol --yes
-
 # Grant Kamino permissions to another delegate
 glam-cli delegate grant <OTHER_DELEGATE> Deposit Withdraw Borrow Repay --protocol KaminoLend --yes
 ```
@@ -152,19 +149,6 @@ await client.access.grantDelegatePermissions(
   new PublicKey(jupProgram),
   parseInt(jupBitflag, 2),
   new BN(1), // SwapAny = 1 << 0
-);
-
-// Grant Drift trading permissions (Deposit + Withdraw + CreateModifyOrders + CancelOrders + PerpMarkets)
-// DriftProtocol permissions: InitUser=1, UpdateUser=2, DeleteUser=4, Deposit=8,
-//   Withdraw=16, Borrow=32, Repay=64, CreateModifyOrders=128, CancelOrders=256,
-//   PerpMarkets=512, SpotMarkets=1024
-const [driftProgram, driftBitflag] = perms["DriftProtocol"];
-const driftPermissions = (1 << 3) | (1 << 4) | (1 << 7) | (1 << 8) | (1 << 9);
-await client.access.grantDelegatePermissions(
-  new PublicKey("Delegate111111111111111111111111"),
-  new PublicKey(driftProgram),
-  parseInt(driftBitflag, 2),
-  new BN(driftPermissions),
 );
 
 // Grant Kamino Deposit + Withdraw + Borrow + Repay
@@ -233,25 +217,6 @@ for (const obligation of obligations) {
 }
 ```
 
-### Open Drift Perpetual Position (CLI)
-
-```bash
-# 1. Enable Drift integration
-glam-cli integration enable DriftProtocol
-
-# 2. Initialize Drift user
-glam-cli drift-protocol init-user --yes
-
-# 3. Deposit USDC as collateral (market_index 0 = USDC)
-glam-cli drift-protocol deposit 0 1000 --yes
-
-# 4. Open 1 SOL-PERP long (market_index 0 = SOL-PERP, price_limit 0 = market order)
-glam-cli drift-protocol perp long 0 1 0 --yes
-
-# 5. View positions
-glam-cli drift-protocol list-positions
-```
-
 ---
 
 ## Advanced Examples
@@ -266,15 +231,13 @@ glam-cli vault create ./tokenized-vault-template.json
 glam-cli vault set <VAULT_STATE_PUBKEY>
 
 # 3. Enable all required integrations
-glam-cli integration enable JupiterSwap DriftProtocol KaminoLend
+glam-cli integration enable JupiterSwap KaminoLend
 
 # 4. Set initial share price (update NAV)
 glam-cli manage price
 
 # 5. Set up a trading delegate (protocol-scoped)
 glam-cli delegate grant <TRADER_PUBKEY> SwapAny --protocol JupiterSwap --yes
-glam-cli delegate grant <TRADER_PUBKEY> Deposit Withdraw CreateModifyOrders PerpMarkets --protocol DriftProtocol --yes
-
 # 6. Configure swap policy
 glam-cli jupiter set-max-slippage 100 --yes
 glam-cli jupiter allowlist-token So11111111111111111111111111111111111111112 --yes
@@ -312,7 +275,7 @@ console.log("Vault created:", client.statePda.toBase58());
 
 // Enable integrations
 const perms = getProgramAndBitflagByProtocolName();
-for (const name of ["JupiterSwap", "DriftProtocol", "KaminoLend"]) {
+for (const name of ["JupiterSwap", "KaminoLend"]) {
   const [program, bitflag] = perms[name];
   await client.access.enableProtocols(
     new PublicKey(program),
@@ -332,14 +295,6 @@ await client.access.grantDelegatePermissions(
   new BN(1), // SwapAny
 );
 
-// Drift Deposit + Withdraw + CreateModifyOrders + PerpMarkets
-const [driftProgram, driftBitflag] = perms["DriftProtocol"];
-await client.access.grantDelegatePermissions(
-  traderPubkey,
-  new PublicKey(driftProgram),
-  parseInt(driftBitflag, 2),
-  new BN((1 << 3) | (1 << 4) | (1 << 7) | (1 << 9)),
-);
 ```
 
 ### Multi-Protocol Yield Strategy (CLI)
@@ -360,16 +315,9 @@ glam-cli kamino-lend deposit \
   EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v \
   5000 --yes
 
-# 3. Deposit SOL as collateral on Drift
-glam-cli drift-protocol deposit 1 50 --yes
-
-# 4. Open delta-neutral position
-glam-cli drift-protocol perp short 0 25 0 --yes
-
-# 5. Check all positions
+# 3. Check all positions
 glam-cli vault holdings
 glam-cli kamino-lend list
-glam-cli drift-protocol list-positions
 ```
 
 ### Investor Subscription Flow (CLI)
@@ -482,11 +430,6 @@ async function manageVault() {
   );
   console.log("Lending positions:", obligations.length);
 
-  // Check Drift positions
-  const driftUser = await client.drift.fetchAndParseDriftUser(0);
-  if (driftUser) {
-    console.log("Drift user:", driftUser);
-  }
 }
 
 manageVault().catch(console.error);
