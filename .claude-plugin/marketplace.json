@@ -10,6 +10,12 @@
   },
   "plugins": [
     {
+      "name": "carbium",
+      "source": "./skills/carbium",
+      "description": "Full-stack Solana infrastructure — bare-metal RPC, Standard WebSocket pubsub, gRPC Full Block streaming, DEX aggregation via CQ1 engine, gasless swaps, and MEV-protected execution via Jito bundling",
+      "category": "Infrastructure"
+    },
+    {
       "name": "coingecko",
       "source": "./skills/coingecko",
       "description": "CoinGecko Solana API for token prices, DEX pool data, OHLCV charts, trades, and market analytics",
