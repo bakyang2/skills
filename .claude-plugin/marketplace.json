@@ -12,7 +12,7 @@
     {
       "name": "arcium",
       "source": "./skills/arcium",
-      "description": "Arcium Network for encrypted on-chain computation — data stays private during processing via MPC, enabling dark pools, sealed-bid auctions, encrypted voting, confidential DeFi, and hidden game state on Solana",
+      "description": "Arcium Network for encrypted computation via MPC — data stays private during processing, enabling dark pools, sealed-bid auctions, encrypted voting, confidential DeFi, and hidden game state on Solana",
       "category": "Infrastructure"
     },
     {
