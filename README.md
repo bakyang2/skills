@@ -22,7 +22,7 @@ Add the marketplace:
 Install skills:
 
 ```
-/plugin install drift
+/plugin install jupiter
 /plugin install helius
 /plugin install meteora
 ```
@@ -33,9 +33,9 @@ Install skills:
 2. Navigate to **Rules & Commands** → **Project Rules** → **Add Rule** → **Remote Rule (GitHub)**
 3. Enter: `https://github.com/sendaifun/skills.git`
 
-Skills are auto-discovered based on context. Ask about Drift perpetuals, Helius RPCs, or Metaplex NFTs and the agent uses the relevant skill automatically.
+Skills are auto-discovered based on context. Ask about Jupiter swaps, Helius RPCs, or Metaplex NFTs and the agent uses the relevant skill automatically.
 
-**Verify:** Ask *"How do I place a perp order on Drift?"* — if working, the agent will reference Drift SDK patterns.
+**Verify:** Ask *"How do I get a quote and swap with Jupiter Ultra?"* — if working, the agent will reference Jupiter API patterns.
 
 ### Any Agent
 
@@ -50,7 +50,6 @@ npx skills add sendaifun/skills
 | Skill | Description |
 |-------|-------------|
 | [jupiter](skills/jupiter/) | Ultra swaps, limit orders, DCA, perpetuals, lending, and token APIs |
-| [drift](skills/drift/) | Perpetuals, spot trading, cross-collateral, and vaults |
 | [glam](skills/glam/) | Tokenized vaults, DeFi integrations (Jupiter, Kamino), staking, asset management |
 | [kamino](skills/kamino/) | Lending, borrowing, liquidity management, leverage trading |
 | [lulo](skills/lulo/) | Lending aggregator across Kamino, Drift, MarginFi, Jupiter |

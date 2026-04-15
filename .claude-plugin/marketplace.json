@@ -46,12 +46,6 @@
       "category": "Trading"
     },
     {
-      "name": "drift",
-      "source": "./skills/drift",
-      "description": "Drift Protocol SDK for perpetual futures, spot trading, cross-collateral, and vaults",
-      "category": "DeFi"
-    },
-    {
       "name": "glam",
       "source": "./skills/glam",
       "description": "GLAM Protocol for tokenized vaults, DeFi integrations (Jupiter, Drift, Kamino), staking, access control, and asset management on Solana",
@@ -61,12 +55,6 @@
       "name": "helius",
       "source": "./skills/helius",
       "description": "Build Solana applications with Helius infrastructure including transaction sending (Sender), asset/NFT queries (DAS API), real-time streaming (WebSockets, LaserStream), event pipelines (webhooks), priority fees, and wallet analysis",
-      "category": "Infrastructure"
-    },
-    {
-      "name": "helius-cli",
-      "source": "./skills/helius-cli",
-      "description": "Command-line tool for AI agents to autonomously sign up for Helius accounts and get API keys without human intervention",
       "category": "Infrastructure"
     },
     {
@@ -80,6 +68,12 @@
       "source": "./skills/helius-phantom",
       "description": "Build frontend Solana applications with Phantom Connect SDK and Helius infrastructure for wallet connection, transaction signing, and secure API proxying",
       "category": "Frontend"
+    },
+    {
+      "name": "jupiter",
+      "source": "./skills/jupiter",
+      "description": "Jupiter APIs — Ultra Swap, Lend, Perps, Trigger, Recurring, Tokens, Price, Portfolio, routing, and production integration patterns",
+      "category": "DeFi"
     },
     {
       "name": "kamino",
