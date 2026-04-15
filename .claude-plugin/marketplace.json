@@ -10,6 +10,12 @@
   },
   "plugins": [
     {
+      "name": "arcium",
+      "source": "./skills/arcium",
+      "description": "Arcium Network for encrypted computation via MPC — data stays private during processing, enabling dark pools, sealed-bid auctions, encrypted voting, confidential DeFi, and hidden game state on Solana",
+      "category": "Infrastructure"
+    },
+    {
       "name": "carbium",
       "source": "./skills/carbium",
       "description": "Full-stack Solana infrastructure — bare-metal RPC, Standard WebSocket pubsub, gRPC Full Block streaming, DEX aggregation via CQ1 engine, gasless swaps, and MEV-protected execution via Jito bundling",

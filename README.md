@@ -66,6 +66,7 @@ npx skills add sendaifun/skills
 
 | Skill | Description |
 |-------|-------------|
+| [arcium](skills/arcium/) | Encrypted computation via MPC — dark pools, sealed-bid auctions, encrypted voting, confidential DeFi |
 | [helius](skills/helius/) | RPC, DAS API, webhooks, priority fees, LaserStream gRPC |
 | [quicknode](skills/quicknode/) | RPC (80+ chains), DAS API, Yellowstone gRPC, Streams, webhooks, priority fees, Metis Jupiter |
 | [light-protocol](skills/light-protocol/) | ZK Compression, rent-free compressed tokens |
