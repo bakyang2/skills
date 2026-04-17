@@ -2,6 +2,8 @@
 
 Execute a token swap where Carbium covers the network fee. Output token must be SOL.
 
+> **Note:** Gasless swaps currently use the v1 swap endpoint (`/api/v1/swap`) with the `gasless=true` flag.
+
 ## Prerequisites
 
 ```bash
@@ -26,7 +28,8 @@ const USDC_MINT = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
 
 async function gaslessSwap(wallet: Keypair, usdcAmount: number) {
   // Output MUST be SOL for gasless to work
-  const url = new URL("https://api.carbium.io/api/v2/swap");
+  // Gasless uses v1 swap endpoint with fromMint/toMint params
+  const url = new URL("https://api.carbium.io/api/v1/swap");
   url.searchParams.set("owner", wallet.publicKey.toBase58());
   url.searchParams.set("fromMint", USDC_MINT);
   url.searchParams.set("toMint", SOL_MINT);

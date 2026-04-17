@@ -1,11 +1,21 @@
 # Carbium Swap API Reference
 
-Base URL: `https://api.carbium.io/api/v2`
 Auth: `X-API-KEY` header on all requests
 
-## GET /quote
+## API Versions
 
-Get optimized quote with optional executable transaction.
+| Version | Base URL | Parameters | Status |
+|---|---|---|---|
+| **v2 (Q1)** | `https://api.carbium.io/api/v2` | `src_mint`, `dst_mint`, `amount_in`, `slippage_bps` | **Current** |
+| v1 (legacy) | `https://api.carbium.io/api/v1` | `fromMint`, `toMint`, `amount`, `slippage` | Operational, legacy |
+
+> **Do not mix parameter families across versions.** Sending `fromMint` to a v2 endpoint or `src_mint` to a v1 endpoint will fail or return bad results.
+
+---
+
+## v2 — GET /api/v2/quote (Q1 Engine)
+
+Get optimized quote with optional executable transaction. **This is the recommended integration path.**
 
 | Param | Type | Required | Description |
 |---|---|---|---|
@@ -15,11 +25,39 @@ Get optimized quote with optional executable transaction.
 | `slippage_bps` | integer | Yes | Slippage tolerance in basis points (100 = 1%) |
 | `user_account` | string | No | User wallet address. If included, response includes `txn` field with base64 serialized transaction ready for signing |
 
-**Response:** JSON with quote details. If `user_account` provided, includes `txn` field.
+**Response fields:**
+
+| Field | Description |
+|---|---|
+| `srcAmountIn` | Confirmed raw input amount |
+| `destAmountOut` | Expected output amount |
+| `destAmountOutMin` | Minimum output after slippage |
+| `priceImpactPct` | Price impact percentage |
+| `routePlan` | Array of route steps (swap provider + percent) |
+| `txn` | Base64 transaction payload (only when `user_account` is present) |
+
+**Key insight:** Include `user_account` to get the executable transaction in the same call. No separate swap endpoint needed for v2 integrations.
 
 ---
 
-## GET /quote/all
+## v1 — Legacy Endpoints
+
+These endpoints are still operational and required for features not yet available on v2.
+
+### GET /api/v1/quote
+
+Provider-specific quote.
+
+| Param | Type | Required | Description |
+|---|---|---|---|
+| `fromMint` | string | Yes | Input token mint address |
+| `toMint` | string | Yes | Output token mint address |
+| `amount` | integer | Yes | Input amount in smallest unit |
+| `slippage` | integer | Yes | Slippage in basis points |
+| `provider` | string | Yes | DEX provider to route through |
+| `pool` | string | No | Custom pool address |
+
+### GET /api/v1/quote/all
 
 Compare quotes from all supported DEX providers simultaneously.
 
@@ -30,13 +68,7 @@ Compare quotes from all supported DEX providers simultaneously.
 | `amount` | integer | Yes | Input amount in smallest unit |
 | `slippage` | integer | Yes | Slippage in basis points |
 
-**Response:** JSON with quotes from each available provider for the given pair.
-
-> **Note:** This endpoint uses `fromMint`/`toMint` naming (like `/swap`), not `src_mint`/`dst_mint` (like `/quote`).
-
----
-
-## GET /swap
+### GET /api/v1/swap
 
 Get a serialized swap transaction for a specific provider.
 
@@ -47,7 +79,7 @@ Get a serialized swap transaction for a specific provider.
 | `toMint` | string | Yes | Output token mint address |
 | `amount` | integer | Yes | Input amount in smallest unit |
 | `slippage` | integer | Yes | Slippage in basis points |
-| `provider` | string | Yes | DEX provider to route through (see supported list below) |
+| `provider` | string | Yes | DEX provider to route through |
 | `pool` | string | No | Custom pool address for direct routing |
 | `feeLamports` | integer | No | Custom fee amount in lamports |
 | `feeReceiver` | string | No | Account receiving the custom fee (required if `feeLamports` set) |
@@ -57,13 +89,7 @@ Get a serialized swap transaction for a specific provider.
 
 **Response:** base64-encoded serialized `VersionedTransaction`. Deserialize → sign → submit via RPC.
 
-**Error responses:**
-- `400`: `{ error: { message: "No pool found" } }` — invalid pair or no liquidity
-- `401`: `{ error: { message: "API Key not found" } }` — missing/invalid key
-
----
-
-## GET /swap/bundle
+### GET /api/v1/swap/bundle
 
 Submit a signed transaction via Jito bundle for MEV protection.
 
@@ -73,11 +99,7 @@ Submit a signed transaction via Jito bundle for MEV protection.
 
 **Response:** JSON with bundle ID and transaction hash.
 
-**Flow:** Get transaction from `/swap` → sign locally → submit via `/swap/bundle`.
-
----
-
-## GET /fee/custom
+### GET /api/v1/fee/custom
 
 Generate a custom fee transfer transaction.
 
@@ -108,18 +130,15 @@ Generate a custom fee transfer transaction.
 
 ---
 
-## Naming Inconsistency Warning
+## Parameter Mapping Across Versions
 
-The Quote and Swap endpoints use **different parameter names** for the same concepts:
-
-| Concept | `/quote` param | `/swap` param |
+| Concept | v2/Q1 (`/api/v2/quote`) | v1 (`/api/v1/*`) |
 |---|---|---|
 | Input token | `src_mint` | `fromMint` |
 | Output token | `dst_mint` | `toMint` |
 | Amount | `amount_in` | `amount` |
 | Slippage | `slippage_bps` | `slippage` |
-
-Use the exact parameter names for each endpoint. Mismatched names will return silent bad results or errors.
+| Get executable tx | Include `user_account` in quote | Separate `/api/v1/swap` call |
 
 ---
 

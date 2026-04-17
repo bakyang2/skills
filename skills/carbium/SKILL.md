@@ -525,21 +525,22 @@ For complete gRPC reference with response shapes, see `resources/grpc-reference.
 
 Aggregated DEX quotes and execution powered by the CQ1 engine — sub-millisecond quotes, ~10ms chain-to-queryable latency, binary-native state.
 
-**Base URL:** `https://api.carbium.io/api/v2`
+**Base URL:** `https://api.carbium.io`
 **Auth:** `X-API-KEY: YOUR_API_KEY` header on all requests
 **Get your key:** [api.carbium.io/login](https://api.carbium.io/login) (free account)
 
-### Endpoints
+### API Versions
 
-| Endpoint | Method | Description |
+| Version | Surface | Status |
 |---|---|---|
-| `/quote` | GET | Get optimized quote with optional executable transaction |
-| `/quote/all` | GET | Compare quotes from all supported DEX providers |
-| `/swap` | GET | Get serialized swap transaction for a specific provider |
-| `/swap/bundle` | GET | Submit signed transaction via Jito bundle (MEV protection) |
-| `/fee/custom` | GET | Generate custom fee transfer transaction |
+| **v2 (Q1)** | `GET /api/v2/quote` | **Current — use this for new integrations** |
+| v1 (legacy) | `GET /api/v1/quote`, `/api/v1/swap`, `/api/v1/quote/all`, `/api/v1/swap/bundle` | Legacy — still operational |
 
-### 1. Get Quote
+> **Important:** v2 and v1 use different parameter names. Do not mix them. v2 (Q1) uses `src_mint`/`dst_mint`/`amount_in`/`slippage_bps`. v1 uses `fromMint`/`toMint`/`amount`/`slippage`.
+
+### v2 / Q1 — Quote + Executable Transaction (Recommended)
+
+The Q1 engine returns both the quote **and** an executable transaction in a single call when `user_account` is included. No separate swap endpoint needed.
 
 ```
 GET /api/v2/quote
@@ -551,7 +552,9 @@ GET /api/v2/quote
 | `dst_mint` | Yes | Output token mint address |
 | `amount_in` | Yes | Input amount in smallest unit (lamports) |
 | `slippage_bps` | Yes | Slippage tolerance in basis points |
-| `user_account` | No | If included, response includes a `txn` field (base64 serialized transaction) |
+| `user_account` | No | Wallet address — if included, response includes executable `txn` field |
+
+**Quote only (no transaction):**
 
 ```typescript
 const quote = await fetch(
@@ -562,6 +565,23 @@ const quote = await fetch(
   "&slippage_bps=100",
   { headers: { "X-API-KEY": process.env.CARBIUM_API_KEY! } }
 ).then(r => r.json());
+// Returns: { srcAmountIn, destAmountOut, destAmountOutMin, priceImpactPct, routePlan }
+```
+
+**Quote + executable transaction (include `user_account`):**
+
+```typescript
+const quote = await fetch(
+  "https://api.carbium.io/api/v2/quote" +
+  "?src_mint=So11111111111111111111111111111111111111112" +
+  "&dst_mint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" +
+  "&amount_in=1000000000" +
+  "&slippage_bps=100" +
+  "&user_account=YOUR_WALLET_ADDRESS",
+  { headers: { "X-API-KEY": process.env.CARBIUM_API_KEY! } }
+).then(r => r.json());
+// Returns: { srcAmountIn, destAmountOut, destAmountOutMin, priceImpactPct, routePlan, txn }
+// txn is base64-encoded, ready for deserialization and signing
 ```
 
 ```python
@@ -574,77 +594,28 @@ resp = httpx.get(
         "dst_mint": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
         "amount_in": 1_000_000_000,
         "slippage_bps": 100,
+        "user_account": "YOUR_WALLET_ADDRESS",  # include for executable txn
     },
     headers={"X-API-KEY": os.environ["CARBIUM_API_KEY"]},
 )
 print(resp.json())
 ```
 
-### 2. Compare All Providers
+### v1 Legacy Endpoints
 
-```
-GET /api/v2/quote/all
-```
+These endpoints are still operational but use the older parameter family. Do not mix v1 params with v2 URLs.
 
-| Param | Required | Description |
-|---|---|---|
-| `fromMint` | Yes | Input token mint |
-| `toMint` | Yes | Output token mint |
-| `amount` | Yes | Input amount in smallest unit |
-| `slippage` | Yes | Slippage in basis points |
+| Endpoint | Method | Params | Description |
+|---|---|---|---|
+| `/api/v1/quote` | GET | `fromMint`, `toMint`, `amount`, `slippage`, `provider` | Provider-specific quote |
+| `/api/v1/quote/all` | GET | `fromMint`, `toMint`, `amount`, `slippage` | Compare quotes across all providers |
+| `/api/v1/swap` | GET | `owner`, `fromMint`, `toMint`, `amount`, `slippage`, `provider` + optional flags | Get serialized swap transaction |
+| `/api/v1/swap/bundle` | GET | `signedTransaction` | Submit via Jito bundle (MEV protection) |
+| `/api/v1/fee/custom` | GET | `payer`, `receiver`, `lamports` | Generate custom fee transfer transaction |
 
-Returns quotes from all supported DEX providers for comparison.
+v1 `/swap` supports additional execution flags: `gasless`, `mevSafe`, `priorityMicroLamports`, `feeLamports`, `feeReceiver`, `pool`.
 
-### 3. Get Swap Transaction
-
-```
-GET /api/v2/swap
-```
-
-| Param | Required | Description |
-|---|---|---|
-| `owner` | Yes | Wallet address of the user |
-| `fromMint` | Yes | Input token mint |
-| `toMint` | Yes | Output token mint |
-| `amount` | Yes | Input amount in smallest unit |
-| `slippage` | Yes | Slippage in basis points |
-| `provider` | Yes | DEX provider to route through |
-| `pool` | No | Custom pool address |
-| `feeLamports` | No | Custom fee amount in lamports |
-| `feeReceiver` | No | Custom fee recipient (required if feeLamports set) |
-| `priorityMicroLamports` | No | Compute unit price for priority fees |
-| `mevSafe` | No | If true, includes Jito tip instruction |
-| `gasless` | No | If true, gasless swap (output token must be SOL) |
-
-Returns a base64-encoded serialized transaction. Deserialize, sign, then submit via RPC.
-
-> **Naming inconsistency warning:** Quote uses `src_mint`/`dst_mint`/`amount_in`/`slippage_bps`. Swap uses `fromMint`/`toMint`/`amount`/`slippage`. Use the exact param names per endpoint.
-
-### 4. Jito Bundle (MEV-Protected Execution)
-
-```
-GET /api/v2/swap/bundle
-```
-
-| Param | Required | Description |
-|---|---|---|
-| `signedTransaction` | Yes | Base64-encoded signed transaction |
-
-Returns bundle ID and transaction hash. Routes through Jito for MEV protection without requiring a separate Jito SDK.
-
-### 5. Custom Fee Transaction
-
-```
-GET /api/v2/fee/custom
-```
-
-| Param | Required | Description |
-|---|---|---|
-| `payer` | Yes | Address of the fee payer |
-| `receiver` | Yes | Address of the fee receiver |
-| `lamports` | Yes | Fee amount in lamports |
-
-### Full Swap Execute Flow (TypeScript)
+### Full Swap Execute Flow (TypeScript) — v2/Q1
 
 ```typescript
 import { Connection, VersionedTransaction, Keypair } from "@solana/web3.js";
@@ -654,19 +625,22 @@ const connection = new Connection(
   "confirmed"
 );
 
-// 1. Get swap transaction
-const res = await fetch(
-  "https://api.carbium.io/api/v2/swap" +
-  "?owner=YOUR_WALLET_ADDRESS" +
-  "&fromMint=So11111111111111111111111111111111111111112" +
-  "&toMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" +
-  "&amount=100000000&slippage=100&provider=raydium",
-  { headers: { accept: "text/plain", "X-API-KEY": process.env.CARBIUM_API_KEY! } }
-);
-const { transaction } = await res.json();
+// 1. Get quote with executable transaction (single call)
+const url = new URL("https://api.carbium.io/api/v2/quote");
+url.searchParams.set("src_mint", "So11111111111111111111111111111111111111112");
+url.searchParams.set("dst_mint", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v");
+url.searchParams.set("amount_in", "100000000");
+url.searchParams.set("slippage_bps", "100");
+url.searchParams.set("user_account", "YOUR_WALLET_ADDRESS");
+
+const quote = await fetch(url, {
+  headers: { "X-API-KEY": process.env.CARBIUM_API_KEY! },
+}).then(r => r.json());
+
+if (!quote.txn) throw new Error("No executable transaction — check user_account param");
 
 // 2. Deserialize and sign
-const tx = VersionedTransaction.deserialize(Buffer.from(transaction, "base64"));
+const tx = VersionedTransaction.deserialize(Buffer.from(quote.txn, "base64"));
 // tx.sign([yourKeypair]);
 
 // 3. Submit via RPC
@@ -718,7 +692,7 @@ Gasless swaps let users execute on-chain transactions without holding SOL to pay
 
 ### Constraint
 
-Gasless swaps require the **output token to be SOL**. Set `gasless: true` on the `/swap` endpoint.
+Gasless swaps require the **output token to be SOL**. Currently available on the v1 swap endpoint.
 
 ### When to Use
 
@@ -728,11 +702,11 @@ Gasless swaps require the **output token to be SOL**. Set `gasless: true` on the
 
 ### Integration
 
-Add `gasless=true` to your swap request:
+Add `gasless=true` to a v1 swap request:
 
 ```typescript
 const res = await fetch(
-  "https://api.carbium.io/api/v2/swap" +
+  "https://api.carbium.io/api/v1/swap" +
   "?owner=WALLET&fromMint=USDC_MINT&toMint=SOL_MINT" +
   "&amount=1000000&slippage=100&provider=raydium&gasless=true",
   { headers: { "X-API-KEY": process.env.CARBIUM_API_KEY! } }
@@ -939,14 +913,16 @@ const connection = new Connection(
 
 ### From Jupiter Swap API
 
-Parameter mapping:
+Parameter mapping (v2/Q1):
 
-| Jupiter | Carbium Quote | Carbium Swap |
-|---|---|---|
-| `inputMint` | `src_mint` | `fromMint` |
-| `outputMint` | `dst_mint` | `toMint` |
-| `amount` | `amount_in` | `amount` |
-| `slippageBps` | `slippage_bps` | `slippage` |
+| Jupiter | Carbium v2/Q1 (`/api/v2/quote`) |
+|---|---|
+| `inputMint` | `src_mint` |
+| `outputMint` | `dst_mint` |
+| `amount` | `amount_in` |
+| `slippageBps` | `slippage_bps` |
+
+Key difference: Carbium Q1 returns the executable transaction in the quote response when `user_account` is included. No separate swap call needed.
 
 ### From Triton gRPC
 

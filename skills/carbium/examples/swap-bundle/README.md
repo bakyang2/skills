@@ -2,6 +2,8 @@
 
 Execute a swap with Jito MEV protection using the Carbium Swap API. No separate Jito SDK required.
 
+> **Note:** Bundle submission currently uses the v1 endpoints (`/api/v1/swap` with `mevSafe=true` + `/api/v1/swap/bundle`).
+
 ## Prerequisites
 
 ```bash
@@ -22,7 +24,7 @@ const connection = new Connection(
 
 const API_KEY = process.env.CARBIUM_API_KEY!;
 
-// Step 1: Get swap transaction with MEV safety
+// Step 1: Get swap transaction with MEV safety (v1 endpoint)
 async function getSwapTx(
   owner: string,
   fromMint: string,
@@ -31,7 +33,7 @@ async function getSwapTx(
   slippage: number,
   provider: string
 ) {
-  const url = new URL("https://api.carbium.io/api/v2/swap");
+  const url = new URL("https://api.carbium.io/api/v1/swap");
   url.searchParams.set("owner", owner);
   url.searchParams.set("fromMint", fromMint);
   url.searchParams.set("toMint", toMint);
@@ -57,9 +59,9 @@ function signTransaction(base64Tx: string, wallet: Keypair): string {
   return Buffer.from(tx.serialize()).toString("base64");
 }
 
-// Step 3: Submit via Jito bundle
+// Step 3: Submit via Jito bundle (v1 endpoint)
 async function submitBundle(signedBase64: string) {
-  const url = new URL("https://api.carbium.io/api/v2/swap/bundle");
+  const url = new URL("https://api.carbium.io/api/v1/swap/bundle");
   url.searchParams.set("signedTransaction", signedBase64);
 
   const res = await fetch(url, {

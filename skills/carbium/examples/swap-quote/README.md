@@ -1,6 +1,6 @@
-# Swap Quote — Quote → Swap → Sign → Submit
+# Swap Quote — Quote + Execute in One Call (v2/Q1)
 
-Full swap flow using the Carbium Swap API: get a quote, fetch the swap transaction, sign it, and submit via RPC.
+Full swap flow using Carbium's Q1 engine: get a quote with executable transaction, sign it, and submit via RPC. Single API call — no separate swap endpoint needed.
 
 ## Prerequisites
 
@@ -24,13 +24,14 @@ const API_KEY = process.env.CARBIUM_API_KEY!;
 const SOL_MINT = "So11111111111111111111111111111111111111112";
 const USDC_MINT = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
 
-// Step 1: Get quote
-async function getQuote(amountLamports: number) {
+// Step 1: Get quote with executable transaction
+async function getQuoteWithTx(walletAddress: string, amountLamports: number) {
   const url = new URL("https://api.carbium.io/api/v2/quote");
   url.searchParams.set("src_mint", SOL_MINT);
   url.searchParams.set("dst_mint", USDC_MINT);
   url.searchParams.set("amount_in", amountLamports.toString());
   url.searchParams.set("slippage_bps", "100");
+  url.searchParams.set("user_account", walletAddress); // triggers txn in response
 
   const res = await fetch(url, {
     headers: { "X-API-KEY": API_KEY },
@@ -40,36 +41,25 @@ async function getQuote(amountLamports: number) {
   return res.json();
 }
 
-// Step 2: Get swap transaction
-async function getSwapTx(ownerAddress: string, amountLamports: number) {
-  const url = new URL("https://api.carbium.io/api/v2/swap");
-  url.searchParams.set("owner", ownerAddress);
-  url.searchParams.set("fromMint", SOL_MINT);
-  url.searchParams.set("toMint", USDC_MINT);
-  url.searchParams.set("amount", amountLamports.toString());
-  url.searchParams.set("slippage", "100");
-  url.searchParams.set("provider", "raydium");
-
-  const res = await fetch(url, {
-    headers: { accept: "text/plain", "X-API-KEY": API_KEY },
-  });
-
-  if (!res.ok) throw new Error(`Swap failed: ${res.status}`);
-  return res.json();
-}
-
-// Step 3: Sign and submit
+// Step 2: Sign and submit
 async function executeSwap(wallet: Keypair, amountLamports: number) {
-  const quote = await getQuote(amountLamports);
-  console.log("Quote:", quote);
-
-  const { transaction } = await getSwapTx(
+  const quote = await getQuoteWithTx(
     wallet.publicKey.toBase58(),
     amountLamports
   );
+  console.log("Quote:", {
+    in: quote.srcAmountIn,
+    out: quote.destAmountOut,
+    minOut: quote.destAmountOutMin,
+    route: quote.routePlan,
+  });
+
+  if (!quote.txn) {
+    throw new Error("No executable transaction — ensure user_account is set");
+  }
 
   const tx = VersionedTransaction.deserialize(
-    Buffer.from(transaction, "base64")
+    Buffer.from(quote.txn, "base64")
   );
   tx.sign([wallet]);
 
