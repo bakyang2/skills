@@ -808,7 +808,7 @@ yarn cli print-all-obligation-accounts --rpc <RPC> | jq --stream 'select(.[0][1]
 
 | Program | Address |
 |---------|---------|
-| Kamino Lending | `KLend2g3cP87ber41qQDzWpAFuqP2tCxDqC8S3k7L1U` |
+| Kamino Lending | `KLend2g3cP87fffoy8q1mQqGKjrxjC8boSyAYavgmjD` |
 | Main Market | `7u3HeHxYDLhnCoErrtycNokbQYbWGzLs6JSDqGAv5PfF` |
 | Kamino Liquidity | `KLIQ... (varies)` |
 | Scope Oracle | `ScopE... (varies)` |
