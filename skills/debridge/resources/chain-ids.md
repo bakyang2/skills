@@ -190,7 +190,7 @@ pub fn check_chain(
 ```
 
 For the complete list of supported chains, see:
-- [deBridge Docs](https://docs.debridge.com/chains)
+- [deBridge Docs](https://docs.debridge.com)
 - [deBridge App](https://app.debridge.finance)
 
 ## Common Chain ID Mappings

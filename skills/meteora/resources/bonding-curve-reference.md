@@ -375,7 +375,6 @@ await sendAndConfirmTransaction(connection, claimTx, [wallet]);
 For pools that haven't auto-graduated, use the web interface:
 
 - **Mainnet**: https://migrator.meteora.ag
-- **Devnet**: https://migrator.meteora.ag/devnet
 
 ## Program Address
 

@@ -343,6 +343,5 @@ async function claimCreatorFees(
 
 ## Related Resources
 
-- [LaunchLab UI](https://raydium.io/launchlab)
 - [SDK Documentation](https://github.com/raydium-io/raydium-sdk-V2)
 - [Raydium Discord](https://discord.gg/raydium)

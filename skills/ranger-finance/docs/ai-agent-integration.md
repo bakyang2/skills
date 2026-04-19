@@ -18,24 +18,14 @@ Ranger provides an MCP server that exposes trading capabilities as tools for AI 
 - Python 3.10+
 - pip or uv package manager
 
-### Install Dependencies
-
-```bash
-pip install mcp-agent numpy
-```
-
-Or using uv:
-
-```bash
-uv pip install mcp-agent numpy
-```
-
 ### Clone the Agent Kit
 
 ```bash
 git clone https://github.com/ranger-finance/ranger-agent-kit.git
 cd ranger-agent-kit
 ```
+
+Install dependencies as listed in the repository's README.
 
 ## MCP Server Setup
 
@@ -366,5 +356,4 @@ Add to your Claude Desktop MCP configuration:
 ## Resources
 
 - [Ranger Agent Kit](https://github.com/ranger-finance/ranger-agent-kit)
-- [MCP Agent Framework](https://github.com/mcp-agent/mcp-agent)
 - [Ranger Finance](https://ranger.finance)

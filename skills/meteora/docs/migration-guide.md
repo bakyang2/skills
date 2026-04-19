@@ -106,7 +106,6 @@ const poolState = await cpAmm.fetchPoolState(newPoolAddress);
 For pools that haven't auto-graduated, use the web interface:
 
 - **Mainnet**: https://migrator.meteora.ag
-- **Devnet**: https://migrator.meteora.ag/devnet
 
 ### When to Use Manual Migrator
 

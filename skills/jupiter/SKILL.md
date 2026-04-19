@@ -123,7 +123,7 @@ Use each block as a minimal execution contract. Fetch the linked refs for full r
 - **Rate Limit**: 50 req/10s base, scales with 24h execute volume (see [Rate Limits](#rate-limits))
 - **Endpoints**: `/order` (GET), `/execute` (POST), `/holdings/{account}` (GET), `/shield` (GET), `/search` (GET), `/routers` (GET)
 - **Gotchas**: Signed payloads have ~2 min TTL. Transactions are immutable after receipt. Split order/execute in code and logging. Re-quote before execution when conditions may have changed.
-- Refs: [Overview](https://dev.jup.ag/docs/ultra/index.md) | [Order](https://dev.jup.ag/docs/ultra/get-order.md) | [Execute](https://dev.jup.ag/docs/ultra/execute-order.md) | [Responses](https://dev.jup.ag/docs/ultra/response.md) | [OpenAPI](https://dev.jup.ag/openapi-spec/ultra/ultra.yaml)
+- Refs: [Overview](https://developers.jup.ag/docs/ultra/index.md) | [Order](https://developers.jup.ag/docs/ultra/get-order.md) | [Execute](https://developers.jup.ag/docs/ultra/execute-order.md) | [Responses](https://developers.jup.ag/docs/ultra/response.md)
 
 ---
 
@@ -135,7 +135,7 @@ Use each block as a minimal execution contract. Fetch the linked refs for full r
 - **SDK**: `@jup-ag/lend` (TypeScript)
 - **Endpoints**: `/earn/deposit` (POST), `/earn/withdraw` (POST), `/earn/mint` (POST), `/earn/redeem` (POST), `/earn/deposit-instructions` (POST), `/earn/withdraw-instructions` (POST), `/earn/tokens` (GET), `/earn/positions` (GET), `/earn/earnings` (GET)
 - **Gotchas**: Recompute account state before each state-changing action. Encode risk checks (health factors, liquidation boundaries) as preconditions. All deposit/withdraw/mint/redeem return base64 unsigned `VersionedTransaction`.
-- Refs: [Overview](https://dev.jup.ag/docs/lend/index.md) | [Earn](https://dev.jup.ag/docs/lend/earn.md) | [SDK](https://dev.jup.ag/docs/lend/sdk.md) | [OpenAPI](https://dev.jup.ag/openapi-spec/lend/lend.yaml)
+- Refs: [Overview](https://developers.jup.ag/docs/lend/index.md) | [Earn](https://developers.jup.ag/docs/lend/earn.md) | [SDK](https://developers.jup.ag/docs/lend/sdk.md)
 
 ---
 
@@ -145,7 +145,7 @@ Use each block as a minimal execution contract. Fetch the linked refs for full r
 - **Triggers**: `perps`, `leverage`, `long`, `short`, `position`
 - **Community SDK**: [github.com/julianfssen/jupiter-perps-anchor-idl-parsing](https://github.com/julianfssen/jupiter-perps-anchor-idl-parsing)
 - **Gotchas**: Max 9 simultaneous positions: 3 long (SOL, wETH, wBTC) + 6 short (3 tokens x 2 collateral USDC/USDT). Validate margin/leverage against account model.
-- Refs: [Overview](https://dev.jup.ag/docs/perps/index.md) | [Position account](https://dev.jup.ag/docs/perps/position-account.md) | [Position request](https://dev.jup.ag/docs/perps/position-request-account.md)
+- Refs: [Overview](https://developers.jup.ag/docs/perps/index.md) | [Position account](https://developers.jup.ag/docs/perps/position-account.md) | [Position request](https://developers.jup.ag/docs/perps/position-request-account.md)
 
 ---
 
@@ -157,7 +157,7 @@ Use each block as a minimal execution contract. Fetch the linked refs for full r
 - **Pagination**: 10 orders per page
 - **Endpoints**: `/createOrder` (POST), `/cancelOrder` (POST), `/cancelOrders` (POST, max 5 per tx), `/execute` (POST), `/getTriggerOrders` (GET)
 - **Gotchas**: Frontend enforces 5 USD min; on-chain has no minimum. Program does NOT validate if rates are favorable — validate target price before create. Token-2022 disabled. Default zero slippage ("Exact" mode); set `slippageBps` for "Ultra" mode with higher fill rate.
-- Refs: [Overview](https://dev.jup.ag/docs/trigger/index.md) | [Create](https://dev.jup.ag/docs/trigger/create-order.md) | [Get orders](https://dev.jup.ag/docs/trigger/get-trigger-orders.md) | [Best Practices](https://dev.jup.ag/docs/trigger-api/best-practices) | [OpenAPI](https://dev.jup.ag/openapi-spec/trigger/trigger.yaml)
+- Refs: [Overview](https://developers.jup.ag/docs/trigger/index.md) | [Create](https://developers.jup.ag/docs/trigger/create-order.md) | [Get orders](https://developers.jup.ag/docs/trigger/order-history) | [Best Practices](https://developers.jup.ag/docs/trigger/best-practices)
 
 ---
 
@@ -170,7 +170,7 @@ Use each block as a minimal execution contract. Fetch the linked refs for full r
 - **Pagination**: 10 orders per page
 - **Endpoints**: `/createOrder` (POST), `/cancelOrder` (POST), `/execute` (POST), `/getRecurringOrders` (GET)
 - **Gotchas**: Token-2022 NOT supported. Price-based recurring orders are **deprecated** — use `params.time` only.
-- Refs: [Overview](https://dev.jup.ag/docs/recurring/index.md) | [Create](https://dev.jup.ag/docs/recurring/create-order.md) | [Get orders](https://dev.jup.ag/docs/recurring/get-recurring-orders.md) | [Best Practices](https://dev.jup.ag/docs/recurring/best-practices) | [OpenAPI](https://dev.jup.ag/openapi-spec/recurring/recurring.yaml)
+- Refs: [Overview](https://developers.jup.ag/docs/recurring/index.md) | [Create](https://developers.jup.ag/docs/recurring/create-order.md) | [Get orders](https://developers.jup.ag/docs/recurring/get-recurring-orders.md) | [Best Practices](https://developers.jup.ag/docs/recurring/best-practices)
 
 ---
 
@@ -180,7 +180,7 @@ Use each block as a minimal execution contract. Fetch the linked refs for full r
 - **Triggers**: `token metadata`, `token search`, `verification`, `shield`
 - **Endpoints**: `/search?query={q}` (GET, comma-separate mints, max 100), `/tag?query={tag}` (GET, `verified` or `lst`), `/{category}/{interval}` (GET, categories: `toporganicscore`, `toptraded`, `toptrending`; intervals: `5m`, `1h`, `6h`, `24h`), `/recent` (GET)
 - **Gotchas**: Use mint address as primary identity; treat symbol/name as convenience. Surface `audit.isSus` and `organicScore` in UX.
-- Refs: [Overview](https://dev.jup.ag/docs/tokens/index.md) | [Token info v2](https://dev.jup.ag/docs/tokens/v2/token-information.md) | [OpenAPI](https://dev.jup.ag/openapi-spec/tokens/v2/tokens.yaml)
+- Refs: [Overview](https://developers.jup.ag/docs/tokens/index.md) | [Token info v2](https://developers.jup.ag/docs/tokens/v2/token-information.md)
 
 ---
 
@@ -191,7 +191,7 @@ Use each block as a minimal execution contract. Fetch the linked refs for full r
 - **Limit**: Max 50 mint IDs per request
 - **Endpoints**: `/price/v3?ids={mints}` (GET, comma-separated)
 - **Gotchas**: Tokens with unreliable pricing return `null` or are omitted (not an error). Fail closed on missing/low-confidence data for safety-sensitive actions. Use `confidenceLevel` field.
-- Refs: [Overview](https://dev.jup.ag/docs/price/index.md) | [Price v3](https://dev.jup.ag/docs/price/v3.md) | [OpenAPI](https://dev.jup.ag/openapi-spec/price/v3/price.yaml)
+- Refs: [Overview](https://developers.jup.ag/docs/price/index.md) | [Price v3](https://developers.jup.ag/docs/price/v3.md)
 
 ---
 
@@ -202,7 +202,7 @@ Use each block as a minimal execution contract. Fetch the linked refs for full r
 - **Triggers**: `portfolio`, `positions`, `holdings`
 - **Endpoints**: `/positions/{address}` (GET), `/positions/{address}?platforms={ids}` (GET), `/platforms` (GET), `/staked-jup/{address}` (GET)
 - **Gotchas**: Treat empty positions as valid state. Response is beta — normalize into stable internal schema. Element types: `multiple`, `liquidity`, `trade`, `leverage`, `borrowlend`.
-- Refs: [Overview](https://dev.jup.ag/docs/portfolio/index.md) | [Jupiter positions](https://dev.jup.ag/docs/portfolio/jupiter-positions.md) | [OpenAPI](https://dev.jup.ag/openapi-spec/portfolio/portfolio.yaml)
+- Refs: [Overview](https://developers.jup.ag/docs/portfolio/index.md) | [Jupiter positions](https://developers.jup.ag/docs/portfolio/jupiter-positions.md)
 
 ---
 
@@ -216,7 +216,7 @@ Use each block as a minimal execution contract. Fetch the linked refs for full r
 - **Deposit mints**: JupUSD (`JuprjznTrTSp2UFa3ZBUFgwdAmtZCq4MQCwysN55USD`), USDC
 - **Endpoints**: `/events` (GET), `/events/search` (GET), `/markets/{marketId}` (GET), `/orderbook/{marketId}` (GET), `/orders` (POST), `/orders/status/{pubkey}` (GET), `/positions` (GET), `/positions/{pubkey}` (DELETE), `/positions/{pubkey}/claim` (POST), `/history` (GET), `/leaderboards` (GET)
 - **Gotchas**: Check `position.claimable` before claiming. Winners get $1/contract.
-- Refs: [Overview](https://dev.jup.ag/docs/prediction/index.md) | [Events](https://dev.jup.ag/docs/prediction/events-and-markets.md) | [Positions](https://dev.jup.ag/docs/prediction/open-positions.md) | [OpenAPI](https://dev.jup.ag/openapi-spec/prediction/prediction.yaml)
+- Refs: [Overview](https://developers.jup.ag/docs/prediction/index.md) | [Events](https://developers.jup.ag/docs/prediction/events-and-markets.md) | [Positions](https://developers.jup.ag/docs/prediction/open-positions.md)
 
 ---
 
@@ -228,7 +228,7 @@ Use each block as a minimal execution contract. Fetch the linked refs for full r
 - **Supported tokens**: SOL, USDC, memecoins
 - **Endpoints**: `/craft-send` (POST), `/craft-clawback` (POST), `/pending-invites` (GET), `/invite-history` (GET)
 - **Gotchas**: **Dual-sign requirement** — sender + recipient keypair (derived from invite code). Claims only via Jupiter Mobile (no API claiming). Never expose invite codes.
-- Refs: [Overview](https://dev.jup.ag/docs/send/index.md) | [Invite code](https://dev.jup.ag/docs/send/invite-code.md) | [Craft send](https://dev.jup.ag/docs/send/craft-send.md) | [OpenAPI](https://dev.jup.ag/openapi-spec/send/send.yaml)
+- Refs: [Overview](https://developers.jup.ag/docs/send/index.md) | [Invite code](https://developers.jup.ag/docs/send/invite-code.md) | [Craft send](https://developers.jup.ag/docs/send/craft-send.md)
 
 ---
 
@@ -240,7 +240,7 @@ Use each block as a minimal execution contract. Fetch the linked refs for full r
 - **Endpoints**: `/dbc-pool/create-tx` (POST), `/dbc-pool/submit` (POST, multipart/form-data), `/dbc-pool/addresses/{mint}` (GET), `/dbc/fee` (POST), `/dbc/fee/create-tx` (POST)
 - **Flow**: create-tx -> upload image to presigned URL -> upload metadata to presigned URL -> sign -> submit via `/dbc-pool/submit`
 - **Gotchas**: Must submit via `/dbc-pool/submit` (not externally) for token to get a Studio page on jup.ag. Error codes: `403` = not authorized for pool, `404` = proxy account not found.
-- Refs: [Overview](https://dev.jup.ag/docs/studio/index.md) | [Create token](https://dev.jup.ag/docs/studio/create-token.md) | [Claim fee](https://dev.jup.ag/docs/studio/claim-fee.md) | [OpenAPI](https://dev.jup.ag/openapi-spec/studio/studio.yaml)
+- Refs: [Overview](https://developers.jup.ag/docs/studio/index.md) | [Create token](https://developers.jup.ag/docs/studio/create-token.md) | [Claim fee](https://developers.jup.ag/docs/studio/claim-fee.md)
 
 ---
 
@@ -253,7 +253,7 @@ Use each block as a minimal execution contract. Fetch the linked refs for full r
 - **UI**: [lock.jup.ag](https://lock.jup.ag/)
 - **Security**: Audited by OtterSec and Sec3
 - **Gotchas**: No REST API. Use instruction scripts from the repo's `cli/src/bin/instructions` directory.
-- Refs: [Lock overview](https://dev.jup.ag/docs/lock/index.md)
+- Refs: [Lock overview](https://developers.jup.ag/docs/lock/index.md)
 
 ---
 
@@ -264,7 +264,7 @@ Use each block as a minimal execution contract. Fetch the linked refs for full r
 - **DEX Integration** (into Iris): Free, no fees. Prereqs: code health, security audit, market traction. Implement `jupiter-amm-interface` crate. **Critical**: No network calls in implementation (accounts are pre-batched and cached). Ref impl: [github.com/jup-ag/rust-amm-implementation](https://github.com/jup-ag/rust-amm-implementation)
 - **RFQ Integration** (JupiterZ): Market makers host webhook at `/jupiter/rfq/quote` (POST, 250ms), `/jupiter/rfq/swap` (POST), `/jupiter/rfq/tokens` (GET). Reqs: 95% fill rate, 250ms response, 55s expiry. SDK: [github.com/jup-ag/rfq-webhook-toolkit](https://github.com/jup-ag/rfq-webhook-toolkit)
 - **Market Listing**: Instant routing for tokens < 30 days old. Normal routing (checked every 30 min) requires < 30% loss on $500 round-trip OR < 20% price impact comparing $1k vs $500.
-- Refs: [Overview](https://dev.jup.ag/docs/routing/index.md) | [DEX integration](https://dev.jup.ag/docs/routing/dex-integration.md) | [RFQ integration](https://dev.jup.ag/docs/routing/rfq-integration.md) | [Market listing](https://dev.jup.ag/docs/routing/market-listing.md)
+- Refs: [Overview](https://developers.jup.ag/docs/routing/index.md) | [DEX integration](https://developers.jup.ag/docs/routing/dex-integration.md) | [RFQ integration](https://developers.jup.ag/docs/routing/rfq-integration.md) | [Market listing](https://developers.jup.ag/docs/routing/market-listing.md)
 
 ---
 
@@ -281,7 +281,7 @@ Use each block as a minimal execution contract. Fetch the linked refs for full r
 
 Quotas recalculate every 10 minutes. Pro plan does NOT increase Ultra limits.
 
-**Other APIs**: Managed at portal level. Check [portal rate limits](https://dev.jup.ag/portal/rate-limit.md).
+**Other APIs**: Managed at portal level. Check [portal rate limits](https://developers.jup.ag/portal/rate-limit.md).
 
 **On HTTP 429**: Exponential backoff with jitter: `delay = min(baseDelay * 2^attempt + random(0, jitter), maxDelay)`. Wait for 10s sliding window refresh. Do NOT burst aggressively.
 
@@ -301,9 +301,9 @@ Quotas recalculate every 10 minutes. Pro plan does NOT increase Ultra limits.
 ## Integration Best Practices
 
 1. Start from the API-specific overview before coding endpoint calls.
-2. Enforce auth as a hard precondition for every request. Ref: [Portal setup](https://dev.jup.ag/portal/setup.md)
-3. Design retry logic around documented rate-limit behavior, not fixed assumptions. Ref: [Rate limits](https://dev.jup.ag/portal/rate-limit.md)
-4. Map all non-success responses to typed app errors using documented response semantics. Ref: [API responses](https://dev.jup.ag/portal/responses.md)
+2. Enforce auth as a hard precondition for every request. Ref: [Portal setup](https://developers.jup.ag/portal/setup.md)
+3. Design retry logic around documented rate-limit behavior, not fixed assumptions. Ref: [Rate limits](https://developers.jup.ag/portal/rate-limit.md)
+4. Map all non-success responses to typed app errors using documented response semantics. Ref: [API responses](https://developers.jup.ag/portal/responses.md)
 5. For order-based products (Ultra/Trigger/Recurring), separate create/execute/retrieve phases in code and logs.
 6. Treat network/service health as part of runtime behavior (degrade gracefully). Ref: [Status page](https://status.jup.ag/)
 
@@ -358,11 +358,11 @@ Always fetch the freshest context from referenced docs/specs before executing a 
 
 ## Operational References
 
-- [Portal setup](https://dev.jup.ag/portal/setup.md) — API key configuration
-- [Rate limits](https://dev.jup.ag/portal/rate-limit.md) — Global rate limit policy
-- [Ultra rate limits](https://dev.jup.ag/docs/ultra/rate-limit.md) — Dynamic volume-based limits
-- [API responses](https://dev.jup.ag/portal/responses.md) — Response format standards
-- [Ultra responses](https://dev.jup.ag/docs/ultra/response.md) — Detailed error codes
+- [Portal setup](https://developers.jup.ag/portal/setup.md) — API key configuration
+- [Rate limits](https://developers.jup.ag/portal/rate-limit.md) — Global rate limit policy
+- [Ultra rate limits](https://developers.jup.ag/docs/ultra/rate-limit.md) — Dynamic volume-based limits
+- [API responses](https://developers.jup.ag/portal/responses.md) — Response format standards
+- [Ultra responses](https://developers.jup.ag/docs/ultra/response.md) — Detailed error codes
 - [Status page](https://status.jup.ag/) — Service health
-- [Documentation sitemap](https://dev.jup.ag/llms.txt) — Full docs index
-- [Tool Kits](https://dev.jup.ag/tool-kits/plugin/index.md) — Plugin, Wallet Kit, Referral Program
+- [Documentation sitemap](https://developers.jup.ag/docs/llms.txt) — Full docs index
+- [Tool Kits](https://developers.jup.ag/docs/tool-kits/plugin/index.md) — Plugin, Wallet Kit, Referral Program

@@ -29,7 +29,7 @@ import { Connection, PublicKey } from '@solana/web3.js';
 import { Zap } from '@meteora-ag/zap-sdk';
 
 const connection = new Connection('https://api.mainnet-beta.solana.com');
-const JUPITER_API_URL = 'https://quote-api.jup.ag/v6';
+const JUPITER_API_URL = 'https://api.jup.ag/swap/v1';
 const JUPITER_API_KEY = 'your-api-key';
 
 const zap = new Zap(connection, JUPITER_API_URL, JUPITER_API_KEY);
@@ -248,7 +248,7 @@ const wallet = Keypair.fromSecretKey(/* your key */);
 
 const zap = new Zap(
   connection,
-  'https://quote-api.jup.ag/v6',
+  'https://api.jup.ag/swap/v1',
   'your-jupiter-api-key'
 );
 

@@ -115,7 +115,7 @@ Subscription filters and data format are identical (Yellowstone-compatible).
 ```typescript
 // Jupiter (no auth required)
 const jupQuote = await fetch(
-  "https://quote-api.jup.ag/v6/quote?inputMint=SOL&outputMint=USDC&amount=1000000000&slippageBps=100"
+  "https://api.jup.ag/swap/v1/quote?inputMint=SOL&outputMint=USDC&amount=1000000000&slippageBps=100"
 );
 
 // Carbium (API key required)

@@ -65,7 +65,7 @@ The txtx DSL engine that powers Surfpool's Infrastructure as Code.
 |----------|-----|
 | Main Docs | https://docs.surfpool.run |
 | Website | https://surfpool.run |
-| API Reference | https://docs.surfpool.run/rpc |
+| API Reference | https://docs.surfpool.run/rpc/overview |
 
 ### Video Tutorials
 
@@ -155,5 +155,4 @@ The underlying Solana Virtual Machine API that Surfpool builds upon.
 |----------|-----|
 | GitHub Issues | https://github.com/txtx/surfpool/issues |
 | Releases | https://github.com/txtx/surfpool/releases |
-| Changelog | https://github.com/txtx/surfpool/blob/main/CHANGELOG.md |
 | License | https://github.com/txtx/surfpool/blob/main/LICENSE |

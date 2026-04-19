@@ -737,11 +737,6 @@ await pools.initializePool(/* params */);
 
 Rust trait definitions for DFlow's AMM implementation. Use when building custom AMMs that integrate with DFlow routing.
 
-### Infrastructure Tools
-- **solana-accountsdb-plugin-bigtable** - Geyser plugin for Bigtable
-- **solana-bigtable-connection** - Bigtable connection library
-- **solana-bigtable-geyser-models** - Object models for Geyser data
-
 ---
 
 ## Skill Structure
@@ -786,4 +781,4 @@ dflow/
 - [DFlow Documentation](https://pond.dflow.net)
 - [API Keys](mailto:hello@dflow.net)
 - [Discord Community](https://discord.gg/dflow)
-- [GitHub](https://github.com/dflow-protocol)
+- [GitHub](https://github.com/DFlowProtocol)
