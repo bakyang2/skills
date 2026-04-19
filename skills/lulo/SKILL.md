@@ -76,7 +76,6 @@ const headers = {
 | Environment | URL |
 |-------------|-----|
 | Production | `https://api.lulo.fi` |
-| Staging | `https://staging.lulo.fi` |
 | Blinks | `https://blink.lulo.fi` |
 | Developer Portal | `https://dev.lulo.fi` |
 

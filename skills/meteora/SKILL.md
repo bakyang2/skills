@@ -1040,7 +1040,7 @@ import { Zap } from '@meteora-ag/zap-sdk';
 const connection = new Connection('https://api.mainnet-beta.solana.com');
 
 // Jupiter API key is required (get from Jupiter Portal)
-const JUPITER_API_URL = 'https://quote-api.jup.ag/v6';
+const JUPITER_API_URL = 'https://api.jup.ag/swap/v1';
 const JUPITER_API_KEY = 'your-api-key';
 
 const zap = new Zap(connection, JUPITER_API_URL, JUPITER_API_KEY);

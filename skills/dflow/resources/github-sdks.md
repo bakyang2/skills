@@ -306,108 +306,6 @@ impl RoutableAmm for MyCustomAmm {
 
 ---
 
-## Infrastructure Tools
-
-### solana-accountsdb-plugin-bigtable
-
-**Repository:** [DFlowProtocol/solana-accountsdb-plugin-bigtable](https://github.com/DFlowProtocol/solana-accountsdb-plugin-bigtable)
-**Language:** Rust
-**Fork of:** Solana Labs original
-
-Enables AccountsDb plugin integration with Google Bigtable for Solana state management.
-
-#### Use Cases
-
-- Historical account state storage
-- High-performance account lookups
-- Analytics and data pipelines
-- Archive node infrastructure
-
-#### Configuration
-
-```json
-{
-  "libpath": "/path/to/libsolana_accountsdb_plugin_bigtable.so",
-  "bigtable_project_id": "your-gcp-project",
-  "bigtable_instance_id": "solana-accounts",
-  "bigtable_table_id": "accounts"
-}
-```
-
----
-
-### solana-bigtable-connection
-
-**Repository:** [DFlowProtocol/solana-bigtable-connection](https://github.com/DFlowProtocol/solana-bigtable-connection)
-**Language:** Rust
-**License:** Apache-2.0
-
-Generic Bigtable connection library for Rust applications needing Solana data access.
-
-#### Usage
-
-```rust
-use solana_bigtable_connection::BigtableConnection;
-
-let connection = BigtableConnection::new(
-    "your-project-id",
-    "your-instance-id",
-).await?;
-
-// Read account data
-let account = connection.get_account(&pubkey).await?;
-
-// Read transaction
-let tx = connection.get_transaction(&signature).await?;
-
-// Read block
-let block = connection.get_block(slot).await?;
-```
-
----
-
-### solana-bigtable-geyser-models
-
-**Repository:** [DFlowProtocol/solana-bigtable-geyser-models](https://github.com/DFlowProtocol/solana-bigtable-geyser-models)
-**Language:** Rust
-**License:** Apache-2.0
-
-Object models stored in Bigtable via the Geyser plugin for reading/writing operations.
-
-#### Models
-
-```rust
-use solana_bigtable_geyser_models::{
-    AccountUpdate,
-    TransactionInfo,
-    BlockMeta,
-    SlotStatus,
-};
-
-// Account update model
-let account_update = AccountUpdate {
-    pubkey: account_key,
-    lamports: 1_000_000,
-    owner: program_id,
-    executable: false,
-    rent_epoch: 0,
-    data: account_data,
-    slot: current_slot,
-    write_version: 1,
-};
-
-// Transaction info model
-let tx_info = TransactionInfo {
-    signature,
-    slot,
-    is_vote: false,
-    message: tx_message,
-    meta: tx_meta,
-};
-```
-
----
-
 ## wallet-app
 
 **Repository:** [DFlowProtocol/wallet-app](https://github.com/DFlowProtocol/wallet-app)
@@ -426,9 +324,6 @@ A wallet application interface with DFlow integration.
 | solana-agent-kit | TypeScript | AI agent toolkit for Solana/DFlow |
 | clearpools | TypeScript | Orca Whirlpools with flow segmentation |
 | dflow-amm-interface | Rust | AMM trait definitions for DFlow |
-| solana-accountsdb-plugin-bigtable | Rust | Bigtable AccountsDb plugin |
-| solana-bigtable-connection | Rust | Bigtable connection library |
-| solana-bigtable-geyser-models | Rust | Geyser data models |
 | wallet-app | TypeScript | Wallet interface |
 
 ---

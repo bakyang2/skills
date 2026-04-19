@@ -8,7 +8,7 @@ Official repositories for Switchboard Oracle Protocol.
 
 | Repository | Description | Language |
 |------------|-------------|----------|
-| [switchboard](https://github.com/switchboard-xyz/switchboard) | Main monorepo with SDKs, CLI, and documentation | TypeScript, Rust |
+| [switchboard-sdk](https://github.com/switchboard-xyz/switchboard-sdk) | Public mirror of Switchboard SDKs | TypeScript, Rust |
 
 Contains:
 - `@switchboard-xyz/cli` - Command-line interface
@@ -42,13 +42,6 @@ npm install @switchboard-xyz/on-demand @switchboard-xyz/common
 switchboard-on-demand = "0.8.0"
 ```
 
-### Multi-Chain SDKs
-
-| Repository | Chain | Language |
-|------------|-------|----------|
-| [sui-sdk](https://github.com/switchboard-xyz/sui-sdk) | Sui | TypeScript |
-| [on-demand-solidity](https://github.com/switchboard-xyz/on-demand-solidity) | EVM | Solidity |
-
 ---
 
 ## Examples
@@ -61,20 +54,16 @@ switchboard-on-demand = "0.8.0"
 
 **Structure:**
 ```
-sb-on-demand-examples/
-├── solana/
-│   ├── feeds/
-│   │   ├── basic/          # Anchor framework examples
-│   │   └── advanced/       # Pinocchio framework (optimized)
-│   ├── randomness/
-│   │   ├── coin-flip/      # VRF coin flip game
-│   │   └── pancake-stacker/# VRF stacking game
-│   ├── prediction-market/  # Kalshi integration
-│   ├── x402/              # Paywalled data
-│   └── surge/             # WebSocket streaming
-├── sui/                   # Sui examples
-├── evm/                   # EVM examples
-└── common/                # Cross-chain utilities
+sb-on-demand-examples/solana/
+├── feeds/
+│   ├── basic/          # Anchor framework examples
+│   └── advanced/       # Pinocchio framework (optimized)
+├── randomness/
+│   ├── coin-flip/      # VRF coin flip game
+│   └── pancake-stacker/# VRF stacking game
+├── prediction-market/  # Kalshi integration
+├── x402/              # Paywalled data
+└── surge/             # WebSocket streaming
 ```
 
 ---
@@ -150,7 +139,6 @@ cargo build
 |----------|------|
 | Discord | https://discord.gg/TJAv6ZYvPC |
 | Twitter | https://twitter.com/switchboardxyz |
-| GitHub Discussions | https://github.com/switchboard-xyz/switchboard/discussions |
 
 ---
 
@@ -161,8 +149,3 @@ cargo build
 1. **Start Here**: [sb-on-demand-examples/solana](https://github.com/switchboard-xyz/sb-on-demand-examples/tree/main/solana)
 2. **TypeScript SDK**: [@switchboard-xyz/on-demand](https://github.com/switchboard-xyz/on-demand)
 3. **Rust SDK**: [switchboard-on-demand](https://github.com/switchboard-xyz/solana-sdk)
-
-### For Other Chains
-
-- **Sui**: [switchboard-xyz/sui-sdk](https://github.com/switchboard-xyz/sui-sdk)
-- **EVM**: [switchboard-xyz/on-demand-solidity](https://github.com/switchboard-xyz/on-demand-solidity)

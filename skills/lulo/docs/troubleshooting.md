@@ -354,7 +354,6 @@ const RPC_URLS = {
 ```typescript
 const RPC_ENDPOINTS = [
   'https://api.mainnet-beta.solana.com',
-  'https://solana-api.projectserum.com',
 ];
 
 async function getWorkingConnection(): Promise<Connection> {

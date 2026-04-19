@@ -893,7 +893,7 @@ const proof = await umi.rpc.getAssetProof(assetId);
 - [Token Metadata Docs](https://developers.metaplex.com/token-metadata)
 - [Bubblegum Docs](https://developers.metaplex.com/bubblegum)
 - [Candy Machine Docs](https://developers.metaplex.com/candy-machine)
-- [Genesis Docs](https://developers.metaplex.com/genesis)
+- [Genesis Docs](https://metaplex.com/docs/smart-contracts/genesis)
 
 ### GitHub Repositories
 

@@ -467,7 +467,7 @@ const transferSig = await transferDelegated(
 
 ### Official Documentation
 - [ZK Compression Docs](https://www.zkcompression.com)
-- [Light Protocol Whitepaper](https://github.com/Lightprotocol/light-protocol/blob/main/light-paper-v0.1.0.pdf)
+- [Light Protocol Whitepaper](https://github.com/Lightprotocol/light-protocol/blob/main/light_paper_v0.1.0.pdf)
 
 ### GitHub Repositories
 - [Light Protocol](https://github.com/Lightprotocol/light-protocol) - Main repository
