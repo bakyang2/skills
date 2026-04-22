@@ -91,6 +91,7 @@ npx skills add sendaifun/skills
 
 | Skill | Description |
 |-------|-------------|
+| [birdeye](https://birdeye.so) | Real-time token prices, OHLCV charts, DEX pools, trades, trending tokens, smart money tracking, and wallet analyzer. Fully x402 compatible |
 | [coingecko](skills/coingecko/) | Token prices, DEX pool data, OHLCV charts, trades |
 | [metengine](skills/metengine/) | Smart money analytics for Polymarket, Hyperliquid, and Meteora — wallet scoring, insider detection, capital flow tracking (63 endpoints, x402 pay-per-request) |
 
