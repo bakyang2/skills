@@ -10,6 +10,24 @@
   },
   "plugins": [
     {
+      "name": "arcium",
+      "source": "./skills/arcium",
+      "description": "Arcium Network for encrypted computation via MPC — data stays private during processing, enabling dark pools, sealed-bid auctions, encrypted voting, confidential DeFi, and hidden game state on Solana",
+      "category": "Infrastructure"
+    },
+    {
+      "name": "birdeye",
+      "source": "./skills/birdeye",
+      "description": "Real-time token prices, OHLCV charts, DEX pools, trades, trending tokens, smart money tracking, and wallet analyzer. Fully x402 compatible.",
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "carbium",
+      "source": "./skills/carbium",
+      "description": "Full-stack Solana infrastructure — bare-metal RPC, Standard WebSocket pubsub, gRPC Full Block streaming, DEX aggregation via CQ1 engine, gasless swaps, and MEV-protected execution via Jito bundling",
+      "category": "Infrastructure"
+    },
+    {
       "name": "coingecko",
       "source": "./skills/coingecko",
       "description": "CoinGecko Solana API for token prices, DEX pool data, OHLCV charts, trades, and market analytics",
@@ -34,12 +52,6 @@
       "category": "Trading"
     },
     {
-      "name": "drift",
-      "source": "./skills/drift",
-      "description": "Drift Protocol SDK for perpetual futures, spot trading, cross-collateral, and vaults",
-      "category": "DeFi"
-    },
-    {
       "name": "glam",
       "source": "./skills/glam",
       "description": "GLAM Protocol for tokenized vaults, DeFi integrations (Jupiter, Drift, Kamino), staking, access control, and asset management on Solana",
@@ -49,12 +61,6 @@
       "name": "helius",
       "source": "./skills/helius",
       "description": "Build Solana applications with Helius infrastructure including transaction sending (Sender), asset/NFT queries (DAS API), real-time streaming (WebSockets, LaserStream), event pipelines (webhooks), priority fees, and wallet analysis",
-      "category": "Infrastructure"
-    },
-    {
-      "name": "helius-cli",
-      "source": "./skills/helius-cli",
-      "description": "Command-line tool for AI agents to autonomously sign up for Helius accounts and get API keys without human intervention",
       "category": "Infrastructure"
     },
     {
@@ -68,6 +74,12 @@
       "source": "./skills/helius-phantom",
       "description": "Build frontend Solana applications with Phantom Connect SDK and Helius infrastructure for wallet connection, transaction signing, and secure API proxying",
       "category": "Frontend"
+    },
+    {
+      "name": "jupiter",
+      "source": "./skills/jupiter",
+      "description": "Jupiter APIs — Ultra Swap, Lend, Perps, Trigger, Recurring, Tokens, Price, Portfolio, routing, and production integration patterns",
+      "category": "DeFi"
     },
     {
       "name": "kamino",
@@ -190,6 +202,12 @@
       "category": "DeFi"
     },
     {
+      "name": "sol-incinerator",
+      "source": "./skills/sol-incinerator",
+      "description": "SOL Incinerator SDK for burning tokens, NFTs, and closing accounts",
+      "category": "Infrastructure"
+    },
+    {
       "name": "solana-agent-kit",
       "source": "./skills/solana-agent-kit",
       "description": "Build AI agents that execute 60+ Solana blockchain operations with LangChain, Vercel AI, and MCP support",
@@ -230,6 +248,12 @@
       "source": "./skills/switchboard",
       "description": "Switchboard Oracle for price feeds, on-demand data, VRF randomness, and Surge streaming",
       "category": "Oracles"
+    },
+    {
+      "name": "wallet-analysis",
+      "source": "./skills/wallet-analysis",
+      "description": "Solana-first wallet analysis with Zerion API — portfolio value, token positions, transactions, charts, and wallet PnL across Solana and multichain wallets. API-first, with hosted MCP and x402 on Solana as no-key options for agents.",
+      "category": "Data & Analytics"
     },
     {
       "name": "vulnhunter",

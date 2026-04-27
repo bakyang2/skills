@@ -400,7 +400,7 @@ const tx = new Transaction()
 ### GitHub Repositories
 | Repository | Description |
 |------------|-------------|
-| [switchboard](https://github.com/switchboard-xyz/switchboard) | Main SDK repository |
+| [switchboard-sdk](https://github.com/switchboard-xyz/switchboard-sdk) | Public mirror of Switchboard SDKs |
 | [sb-on-demand-examples](https://github.com/switchboard-xyz/sb-on-demand-examples) | Integration examples |
 | [solana-sdk](https://github.com/switchboard-xyz/solana-sdk) | Rust SDK |
 | [on-demand](https://github.com/switchboard-xyz/on-demand) | TypeScript SDK |

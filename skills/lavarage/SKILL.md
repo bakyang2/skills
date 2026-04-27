@@ -392,7 +392,7 @@ Common error codes returned by the API:
 ## Resources
 
 - **Website**: https://lavarage.xyz
-- **Documentation**: https://docs.lavarage.xyz
+- **Documentation**: https://lavarage.gitbook.io/lavarage
 - **Program ID**: `1avaAUcjccXCjSZzwUvB2gS3DzkkieV2Mw8CjdN65uu`
 - **GitHub**: https://github.com/pinedefi
 

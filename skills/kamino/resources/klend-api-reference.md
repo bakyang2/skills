@@ -529,7 +529,7 @@ import {
 } from "@kamino-finance/klend-sdk";
 
 // Program ID
-const PROGRAM_ID = new PublicKey("KLend2g3cP87ber41qQDzWpAFuqP2tCxDqC8S3k7L1U");
+const PROGRAM_ID = new PublicKey("KLend2g3cP87fffoy8q1mQqGKjrxjC8boSyAYavgmjD");
 
 // Main lending market
 const MAIN_MARKET = new PublicKey("7u3HeHxYDLhnCoErrtycNokbQYbWGzLs6JSDqGAv5PfF");

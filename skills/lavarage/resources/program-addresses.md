@@ -24,4 +24,4 @@
 |-------------|----------|
 | Production | `https://api.lavarage.xyz` |
 | Website | `https://lavarage.xyz` |
-| Docs | `https://docs.lavarage.xyz` |
+| Docs | `https://lavarage.gitbook.io/lavarage` |

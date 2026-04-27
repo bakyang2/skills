@@ -1,6 +1,6 @@
 # Pinocchio Vault Example
 
-A SOL vault program demonstrating PDA-based custody, deposits, withdrawals, and account closing. Based on [Blueshift's Pinocchio Vault course](https://learn.blueshift.gg/en/courses/pinocchio-vault/introduction).
+A SOL vault program demonstrating PDA-based custody, deposits, withdrawals, and account closing. Based on [Blueshift's Pinocchio Vault course](https://learn.blueshift.gg/en/challenges/pinocchio-vault).
 
 ## Program Overview
 

@@ -22,7 +22,7 @@ Add the marketplace:
 Install skills:
 
 ```
-/plugin install drift
+/plugin install jupiter
 /plugin install helius
 /plugin install meteora
 ```
@@ -33,9 +33,9 @@ Install skills:
 2. Navigate to **Rules & Commands** → **Project Rules** → **Add Rule** → **Remote Rule (GitHub)**
 3. Enter: `https://github.com/sendaifun/skills.git`
 
-Skills are auto-discovered based on context. Ask about Drift perpetuals, Helius RPCs, or Metaplex NFTs and the agent uses the relevant skill automatically.
+Skills are auto-discovered based on context. Ask about Jupiter swaps, Helius RPCs, or Metaplex NFTs and the agent uses the relevant skill automatically.
 
-**Verify:** Ask *"How do I place a perp order on Drift?"* — if working, the agent will reference Drift SDK patterns.
+**Verify:** Ask *"How do I get a quote and swap with Jupiter Ultra?"* — if working, the agent will reference Jupiter API patterns.
 
 ### Any Agent
 
@@ -50,7 +50,6 @@ npx skills add sendaifun/skills
 | Skill | Description |
 |-------|-------------|
 | [jupiter](skills/jupiter/) | Ultra swaps, limit orders, DCA, perpetuals, lending, and token APIs |
-| [drift](skills/drift/) | Perpetuals, spot trading, cross-collateral, and vaults |
 | [glam](skills/glam/) | Tokenized vaults, DeFi integrations (Jupiter, Kamino), staking, asset management |
 | [kamino](skills/kamino/) | Lending, borrowing, liquidity management, leverage trading |
 | [lulo](skills/lulo/) | Lending aggregator across Kamino, Drift, MarginFi, Jupiter |
@@ -66,10 +65,12 @@ npx skills add sendaifun/skills
 
 | Skill | Description |
 |-------|-------------|
+| [arcium](skills/arcium/) | Encrypted computation via MPC — dark pools, sealed-bid auctions, encrypted voting, confidential DeFi |
 | [helius](skills/helius/) | RPC, DAS API, webhooks, priority fees, LaserStream gRPC |
 | [quicknode](skills/quicknode/) | RPC (80+ chains), DAS API, Yellowstone gRPC, Streams, webhooks, priority fees, Metis Jupiter |
 | [light-protocol](skills/light-protocol/) | ZK Compression, rent-free compressed tokens |
 | [magicblock](skills/magicblock/) | Ephemeral Rollups, sub-10ms latency, gasless transactions |
+| [sol-incinerator](skills/sol-incinerator/) | Burn tokens, burn nfts, close token accounts |
 | [squads](skills/squads/) | Multisig wallets, smart accounts, account abstraction |
 
 ### Trading
@@ -90,8 +91,10 @@ npx skills add sendaifun/skills
 
 | Skill | Description |
 |-------|-------------|
+| [birdeye](https://birdeye.so) | Real-time token prices, OHLCV charts, DEX pools, trades, trending tokens, smart money tracking, and wallet analyzer. Fully x402 compatible |
 | [coingecko](skills/coingecko/) | Token prices, DEX pool data, OHLCV charts, trades |
 | [metengine](skills/metengine/) | Smart money analytics for Polymarket, Hyperliquid, and Meteora — wallet scoring, insider detection, capital flow tracking (63 endpoints, x402 pay-per-request) |
+| [wallet-analysis](skills/wallet-analysis/) | Solana-first wallet analysis with Zerion API — portfolio value, token positions, transactions, charts, and wallet PnL |
 
 ### Cross-Chain
 

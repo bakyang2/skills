@@ -7,7 +7,6 @@ Complete API documentation for integrating with Lulo's lending aggregator.
 | Environment | URL |
 |-------------|-----|
 | Production | `https://api.lulo.fi` |
-| Staging | `https://staging.lulo.fi` |
 | Developer Portal | `https://dev.lulo.fi` |
 
 ## Authentication

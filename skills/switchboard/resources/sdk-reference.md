@@ -252,12 +252,6 @@ const buffer = Buffer.from([...]); // 32 bytes
 type Network = "mainnet" | "devnet";
 ```
 
-### Chain
-
-```typescript
-type Chain = "solana" | "sui" | "evm";
-```
-
 ---
 
 ## Complete Example

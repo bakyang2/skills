@@ -20,8 +20,8 @@ The main repository containing the ZK Compression Protocol for Solana.
 | `sparse-merkle-tree/` | Cryptographic data structure |
 
 **Key files:**
-- [Light Paper v0.1.0](https://github.com/Lightprotocol/light-protocol/blob/main/light-paper-v0.1.0.pdf) - Technical whitepaper
-- [API Documentation](https://github.com/Lightprotocol/light-protocol/blob/main/docs/api-reference.md)
+- [Light Paper v0.1.0](https://github.com/Lightprotocol/light-protocol/blob/main/light_paper_v0.1.0.pdf) - Technical whitepaper
+- [API Documentation](https://www.zkcompression.com/api-reference/overview)
 
 ---
 
@@ -111,7 +111,7 @@ Audit reports are available in the main repository.
 ### Documentation
 
 - **Official Docs**: [zkcompression.com](https://www.zkcompression.com)
-- **API Reference**: [zkcompression.com/developers](https://www.zkcompression.com/developers)
+- **API Reference**: [zkcompression.com/api-reference/overview](https://www.zkcompression.com/api-reference/overview)
 
 ### Community
 
@@ -138,7 +138,5 @@ The Light Protocol welcomes contributions:
 1. Fork the repository
 2. Create a feature branch
 3. Submit a pull request
-
-See [CONTRIBUTING.md](https://github.com/Lightprotocol/light-protocol/blob/main/CONTRIBUTING.md) for guidelines.
 
 **License:** Apache 2.0

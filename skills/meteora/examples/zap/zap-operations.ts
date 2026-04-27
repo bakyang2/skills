@@ -18,7 +18,7 @@ import BN from "bn.js";
 
 // Configuration
 const RPC_URL = process.env.RPC_URL || "https://api.mainnet-beta.solana.com";
-const JUPITER_API_URL = "https://quote-api.jup.ag/v6";
+const JUPITER_API_URL = "https://api.jup.ag/swap/v1";
 const JUPITER_API_KEY = process.env.JUPITER_API_KEY!;
 
 // Common token mints

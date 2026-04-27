@@ -8,7 +8,7 @@ Reference for all Kamino program and account addresses.
 
 | Program | Address | Description |
 |---------|---------|-------------|
-| Kamino Lending | `KLend2g3cP87ber41qQDzWpAFuqP2tCxDqC8S3k7L1U` | Main lending program |
+| Kamino Lending | `KLend2g3cP87fffoy8q1mQqGKjrxjC8boSyAYavgmjD` | Main lending program |
 | Kamino Liquidity | `6LtLpnUFNByNXLyCoK9wA2MykKAmQNZKBdY8s47dehDc` | Liquidity management program |
 | Scope Oracle | `HFn8GnPADiny6XqUoWE8uRPPxb29ikn4yTuPa9MF2fWJ` | Oracle aggregator |
 
@@ -44,7 +44,7 @@ Reference for all Kamino program and account addresses.
 
 | Program | Address |
 |---------|---------|
-| Kamino Lending | `KLend2g3cP87ber41qQDzWpAFuqP2tCxDqC8S3k7L1U` |
+| Kamino Lending | `KLend2g3cP87fffoy8q1mQqGKjrxjC8boSyAYavgmjD` |
 | Kamino Liquidity | `6LtLpnUFNByNXLyCoK9wA2MykKAmQNZKBdY8s47dehDc` |
 
 ### Test Markets

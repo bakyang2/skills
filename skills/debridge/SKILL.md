@@ -739,8 +739,7 @@ Environment variables for custom networks:
 - [deBridge Documentation](https://docs.debridge.com)
 - [Solana SDK GitHub](https://github.com/debridge-finance/debridge-solana-sdk)
 - [deBridge App](https://app.debridge.finance)
-- [Widget Integration](https://docs.debridge.com/widget)
-- [API Reference](https://docs.debridge.com/api)
+- [Widget Integration](https://docs.debridge.com/dln-details/widget/deBridge-widget)
 
 ## Skill Structure
 

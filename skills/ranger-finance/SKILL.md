@@ -363,9 +363,7 @@ Ranger provides an MCP (Model Context Protocol) server for AI agent integration.
 
 ### Installation (Python)
 
-```bash
-pip install mcp-agent numpy
-```
+Clone [ranger-agent-kit](https://github.com/ranger-finance/ranger-agent-kit) and follow its README for setup.
 
 ### MCP Server Tools
 
