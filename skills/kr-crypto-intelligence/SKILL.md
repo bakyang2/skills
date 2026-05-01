@@ -1,6 +1,6 @@
 ---
 name: kr-crypto-intelligence
-description: Korean crypto market data API with x402 payments. Korean-to-English sentiment analysis (world's first), Kimchi Premium across 180+ tokens, Global vs Korea divergence with AI breakdown. For building agents that analyze Asian crypto markets, monitor regional regulations, or detect Korean retail sentiment shifts.
+description: Korean crypto market data API with x402 payments. Dual-basis Kimchi Premium (official USD/KRW + Upbit USDT live rate, only service in x402 ecosystem), Korean-to-English sentiment analysis (world's first), Kimchi Premium across 180+ tokens, Global vs Korea divergence with AI breakdown. For building agents that analyze Asian crypto markets, monitor regional regulations, or detect Korean retail sentiment shifts.
 ---
 
 # KR Crypto Intelligence Integration Guide
@@ -18,7 +18,7 @@ KR Crypto Intelligence closes that gap.
 | Feature | Description |
 |---------|-------------|
 | **189+ Korean tokens** | Full Upbit + Bithumb coverage, 60s refresh |
-| **Kimchi Premium** | Real-time price gap vs Binance for every supported token |
+| **Dual-Basis Kimchi Premium** | Both `premium_percent` (official USD/KRW) and `premium_pct_usdt` (Upbit KRW-USDT live rate) — gap reveals real arb margin |
 | **Korean Sentiment** | First-in-world Korean news → English sentiment via Claude AI |
 | **Global vs Korea Divergence** | CoinGecko global price + Korean price + AI breakdown (light/deep tiers) |
 | **Investment Warnings** | Live caution flags from Upbit (volume soaring, deposit soaring, listing changes) |
@@ -186,7 +186,7 @@ const top = premiums.filter(p => p.premium_pct > 5);  // unusually high premium
 
 ### Basic Market Data ($0.001 each)
 
-- `GET /api/v1/kimchi-premium?symbol=BTC` — single-token Kimchi Premium
+- `GET /api/v1/kimchi-premium?symbol=BTC` — single-token **dual-basis** Kimchi Premium (`premium_percent` via official USD/KRW + `premium_pct_usdt` via Upbit USDT live rate; gap ≈ structural USDT premium)
 - `GET /api/v1/kr-prices?symbol=BTC&exchange=all` — Upbit + Bithumb prices in KRW
 - `GET /api/v1/fx-rate` — current USD/KRW
 
@@ -248,6 +248,28 @@ if (divergence.magnitude === 'large') {
 
 Wire `market-read` into your agent's reasoning loop — its output is structured JSON with `signal`, `confidence`, `key_factors`, `token_alerts`, `risk_warning`. Treat as one input among many; weight by your agent's existing global signals.
 
+### 6. Dual-Basis Kimchi Arbitrage (Real Margin)
+
+Official USD/KRW is misleading — Korean traders execute through KRW-USDT pairs at a different rate. The gap between `premium_percent` and `premium_pct_usdt` is the **structural USDT premium** (~0.3-1% in normal conditions), and the USDT-based number is the **real arb margin** an agent can capture:
+
+```typescript
+const r = await client.get(
+  'https://api.printmoneylab.com/api/v1/kimchi-premium?symbol=BTC'
+);
+const d = await r.json();
+
+const officialPremium = d.premium_percent;      // e.g. 0.41% (deceiving)
+const realMargin = d.premium_pct_usdt;          // e.g. -0.08% (actual arb basis)
+const usdtRegime = officialPremium - realMargin; // e.g. 0.49 — USDT premium itself
+
+if (Math.abs(realMargin) > 1.5) {
+  // Genuine arbitrage opportunity — trade through USDT pair
+} else if (officialPremium > 2 && realMargin < 0.5) {
+  // Mirage — official kimchi looks high but USDT premium absorbed most of it
+}
+
+KR Crypto Intelligence is the only service in the x402 ecosystem providing both bases. Most "kimchi premium" data feeds use only the official USD/KRW rate, which systematically overstates the arbitrageable margin by the structural USDT premium.
+
 ---
 
 ## AWS Bedrock AgentCore Integration
@@ -302,7 +324,7 @@ Reference: [Coinbase AgentKit docs](https://docs.cdp.coinbase.com/agentkit/welco
 
 | Endpoint | Price | Cache | Purpose |
 |---|---|---|---|
-| `/api/v1/kimchi-premium` | $0.001 | 15s | Single-token Kimchi |
+| `/api/v1/kimchi-premium` | $0.001 | 15s | Single-token **dual-basis** Kimchi (USD/KRW + USDT) |
 | `/api/v1/kr-prices` | $0.001 | 15s | Upbit/Bithumb price |
 | `/api/v1/fx-rate` | $0.001 | 15s | USD/KRW |
 | `/api/v1/stablecoin-premium` | $0.001 | 15s | Fund flow indicator |
