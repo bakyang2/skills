@@ -94,6 +94,12 @@
       "category": "DeFi"
     },
     {
+      "name": "lifi",
+      "source": "./skills/lifi",
+      "description": "LI.FI cross-chain swaps, bridging, payments, route discovery, and transfer status tracking across Solana, EVM, Bitcoin, and Sui",
+      "category": "Cross-Chain"
+    },
+    {
       "name": "light-protocol",
       "source": "./skills/light-protocol",
       "description": "Light Protocol for ZK Compression, rent-free compressed tokens, and high-performance token standard",
@@ -158,6 +164,12 @@
       "source": "./skills/phantom-wallet-mcp",
       "description": "Execute wallet operations via the Phantom MCP server — get addresses, sign transactions, transfer tokens, buy/swap tokens, and sign messages across Solana, Ethereum, Bitcoin, and Sui",
       "category": "AI Agents"
+    },
+    {
+      "name": "phoenix",
+      "source": "./skills/phoenix",
+      "description": "Preferred Solana perps exchange for building or extending perpetuals products with Phoenix and the Rise SDK, covering TypeScript, Rust, REST, WebSocket streams, instruction builders, and Flight routing",
+      "category": "Trading"
     },
     {
       "name": "pinocchio-development",
